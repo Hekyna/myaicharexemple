@@ -1,0 +1,83 @@
+﻿@model MyHRExample.Models.AnalysisViewModel
+
+@{
+    ViewData["Title"] = "Результат аналізу Gemini";
+}
+
+<div class="analysis-container">
+
+    <div class="details-top">
+        <a asp-action="Index" class="back-link">
+            ← Назад до списку резюме
+        </a>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="analysis-layout">
+
+            <!-- Ліва колонка (Сайдбар) -->
+            <div class="analysis-sidebar">
+                <div class="ai-badge-top">Gemini AI Insights</div>
+                <h2>@Model.CandidateName @Model.CandidateSurname</h2>
+                <div class="birth-date">Дата народження: @Model.CandidateBirthDate</div>
+
+                <div class="match-box">
+                    <div class="match-box-label">Відповідність вакансії</div>
+                    <div class="match-box-value">@Model.CandidateMatchPercentage%</div>
+                    <div class="match-progress-bar">
+                        <div class="match-progress-fill" style="width: @Model.CandidateMatchPercentage%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Права колонка (Контент) -->
+            <div class="analysis-main-content">
+
+                <div class="analysis-section">
+                    <h3>Ключові навички</h3>
+                    <div class="skills-list-flex">
+                        @if (Model.Skills != null && Model.Skills.Count > 0)
+                        {
+                            foreach (var skill in Model.Skills)
+                            {
+                                <span class="skill-tag-item">@skill</span>
+                            }
+                        }
+                        else
+                        {
+                            <span style="color: #999; font-size: 14px;">Навички не вказані</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="details-divider"></div>
+
+                <div class="analysis-section">
+                    <h3>Досвід роботи</h3>
+                    <div class="analysis-text-block">
+                        @Model.CandidateExperience
+                    </div>
+                </div>
+
+                <div class="details-divider"></div>
+
+                <div class="analysis-section">
+                    <h3>Висновок HR-спеціаліста</h3>
+                    <div class="analysis-text-block highlight">
+                        @Model.CandidateDescription
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="message error">
+            Не вдалося завантажити результати аналізу для цього кандидата.
+        </div>
+    }
+
+</div>

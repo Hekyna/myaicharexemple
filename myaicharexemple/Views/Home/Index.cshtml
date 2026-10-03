@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Нова вакансія";
+}
+
+<div class="page">
+
+    <div class="top">
+
+        <div>
+            <div class="small-title">
+                HR SYSTEM
+            </div>
+
+            <h1>
+                Нова вакансія
+            </h1>
+
+            <p>
+                Створіть опис вакансії
+            </p>
+        </div>
+
+        <a href="/" class="back-link">
+            ← До вакансій
+        </a>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="message success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="message error">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="paper">
+
+        <form asp-controller="Home"
+              asp-action="UploadRequirements"
+              method="post"
+              enctype="multipart/form-data">
+
+            <textarea class="paper-text"
+                      name="text"
+                      id="vacancyText"
+                      placeholder="Почніть писати вакансію..."></textarea>
+
+            <div class="requirements">
+
+                <div class="requirements-title">
+                    Файл з вимогами до кандидата
+                </div>
+
+                <input type="file"
+                       name="file"
+                       id="requirementsFile" />
+
+            </div>
+
+            <div class="paper-footer">
+
+                <span>
+                    Файл буде завантажено до AWS S3
+                </span>
+
+                <button type="submit">
+                    Опублікувати вакансію
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+    const textarea = document.getElementById("vacancyText");
+
+    textarea.addEventListener("input", function () {
+
+        this.style.height = "auto";
+
+        this.style.height =
+            Math.max(650, this.scrollHeight) + "px";
+
+    });
+
+</script>

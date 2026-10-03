@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<html lang="uk">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - HR System
+    </title>
+
+    <link rel="stylesheet"
+          href="~/css/site.css" />
+
+    <link rel="stylesheet"
+          href="~/css/client.css" />
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            HR<span>SYSTEM</span>
+        </div>
+
+        <nav>
+
+            <a href="/">
+                Вакансії
+            </a>
+
+            <a href="/Client">
+                Кандидати
+            </a>
+
+            <a href="/Resumes">
+                Резюме
+            </a>
+
+            <a href="#">
+                Працівники
+            </a>
+
+            <a href="#">
+                Відділи
+            </a>
+
+        </nav>
+
+        <div class="profile">
+            HR Manager
+        </div>
+
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await RenderSectionAsync(
+    "Scripts",
+        required: false)
+
+</body>
+
+</html>

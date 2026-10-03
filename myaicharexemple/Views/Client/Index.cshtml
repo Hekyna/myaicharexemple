@@ -1,0 +1,130 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Вакансії";
+}
+
+<div class="client-page">
+
+    <div class="client-top">
+
+        <div>
+
+            <div class="client-small-title">
+                HR SYSTEM
+            </div>
+
+            <h1>
+                Вакансії
+            </h1>
+
+            <p>
+                Переглядайте актуальні вакансії та залишайте своє резюме
+            </p>
+
+        </div>
+
+        <a href="/"
+           class="client-back">
+            ← На головну
+        </a>
+
+    </div>
+
+
+    <div class="vacancy-table">
+
+        <div class="table-header">
+
+            <div>
+                Вакансія
+            </div>
+
+            <div>
+                Статус
+            </div>
+
+            <div>
+                Дія
+            </div>
+
+        </div>
+
+
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var vacancy in Model)
+            {
+                var fileName =
+                System.IO.Path.GetFileNameWithoutExtension(vacancy);
+
+                <div class="table-row">
+
+                    <div class="vacancy-name">
+
+                        <div class="vacancy-icon">
+                            📄
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                @fileName
+                            </strong>
+
+                            <span>
+                                Відкрита вакансія
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="vacancy-type">
+
+                        <span class="status-open">
+                            Відкрита
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <a asp-controller="Client"
+                           asp-action="Details"
+                           asp-route-key="@vacancy"
+                           class="view-button">
+
+                            Переглянути
+
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-vacancies">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h2>
+                    Вакансій поки немає
+                </h2>
+
+                <p>
+                    Нові вакансії з'являться після їх публікації.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</div>

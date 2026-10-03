@@ -1,0 +1,607 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   CLIENT PAGE
+========================= */
+
+.client-page {
+    width: 1100px;
+    max-width: calc(100% - 40px);
+    margin: 50px auto 80px auto;
+}
+
+.client-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.client-small-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.client-top h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.client-top p {
+    margin: 10px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.client-back {
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+    .client-back:hover {
+        color: #000;
+    }
+
+
+/* =========================
+   VACANCY TABLE
+========================= */
+
+.vacancy-table {
+    background: white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 180px;
+    padding: 18px 25px;
+    background: #151515;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 180px;
+    align-items: center;
+    min-height: 85px;
+    padding: 10px 25px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+    .table-row:last-child {
+        border-bottom: none;
+    }
+
+.vacancy-name {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.vacancy-icon {
+    width: 42px;
+    height: 42px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.vacancy-name strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.vacancy-name span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
+.vacancy-type {
+    color: #777;
+    font-size: 13px;
+}
+
+.status-open {
+    display: inline-block;
+    padding: 6px 10px;
+    background: #f1f1f1;
+    color: #555;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.view-button {
+    display: inline-block;
+    background: #151515;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 5px;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+    .view-button:hover {
+        background: #333;
+    }
+
+
+/* =========================
+   EMPTY VACANCIES
+========================= */
+
+.empty-vacancies {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.empty-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.empty-vacancies h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.empty-vacancies p {
+    margin-top: 10px;
+    color: #999;
+    font-size: 14px;
+}
+
+
+/* =========================
+   DETAILS PAGE
+========================= */
+
+.details-page {
+    width: 1100px;
+    max-width: calc(100% - 40px);
+    margin: 45px auto 80px auto;
+}
+
+.details-top {
+    margin-bottom: 25px;
+}
+
+.back-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+    .back-link:hover {
+        color: #000;
+    }
+
+.details-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+    align-items: start;
+}
+
+
+/* =========================
+   VACANCY DETAILS
+========================= */
+
+.vacancy-details {
+    background: white;
+    padding: 45px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+}
+
+.details-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.vacancy-details h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.vacancy-status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 12px;
+    background: #f1f1f1;
+    color: #555;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.details-divider {
+    height: 1px;
+    background: #eeeeee;
+    margin: 30px 0;
+}
+
+.details-content {
+    white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+
+/* =========================
+   RESUME CARD
+========================= */
+
+.resume-card {
+    background: #151515;
+    color: white;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+.resume-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.resume-card h2 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.resume-card p {
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 12px 0 25px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .form-group input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border: 1px solid #444;
+        background: #222;
+        color: white;
+        border-radius: 4px;
+        outline: none;
+    }
+
+        .form-group input:focus {
+            border-color: #777;
+        }
+
+        .form-group input[type="file"] {
+            padding: 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+.file-hint {
+    display: block;
+    margin-top: 7px;
+    color: #777;
+    font-size: 11px;
+}
+
+
+/* =========================
+   APPLY BUTTON
+========================= */
+
+.apply-button {
+    width: 100%;
+    border: none;
+    background: white;
+    color: #151515;
+    padding: 13px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+    .apply-button:hover {
+        background: #ddd;
+    }
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+    .details-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .details-page {
+        max-width: calc(100% - 25px);
+    }
+
+    .vacancy-details {
+        padding: 30px;
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .client-page {
+        max-width: calc(100% - 20px);
+        margin-top: 30px;
+    }
+
+    .client-top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .table-row {
+        display: block;
+        padding: 20px;
+    }
+
+    .vacancy-type {
+        margin: 12px 0;
+    }
+
+    .view-button {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+.resume-row {
+    grid-template-columns: 2fr 1.2fr 1.2fr 220px;
+}
+
+.resume-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .resume-actions form {
+        margin: 0;
+    }
+
+.delete-button {
+    border: none;
+    background: #eeeeee;
+    color: #333;
+    padding: 11px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+    .delete-button:hover {
+        background: #dddddd;
+    }
+
+.message {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    background: white;
+    font-size: 14px;
+}
+
+    .message.success {
+        border-left: 4px solid #555;
+    }
+
+    .message.error {
+        border-left: 4px solid #999;
+    }
+
+@media (max-width: 1000px) {
+    .resume-row {
+        display: block;
+    }
+
+        .resume-row > div {
+            margin-bottom: 15px;
+        }
+
+    .resume-actions {
+        flex-wrap: wrap;
+    }
+}
+/* =========================
+   GEMINI ANALYSIS PAGE
+========================= */
+
+.analysis-container {
+    width: 1100px;
+    max-width: calc(100% - 40px);
+    margin: 45px auto 80px auto;
+}
+
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.analysis-sidebar {
+    background: #151515;
+    color: white;
+    padding: 35px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.analysis-main-content {
+    background: white;
+    padding: 45px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+}
+
+.ai-badge-top {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.analysis-sidebar h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.analysis-sidebar .birth-date {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.match-box {
+    background: #222;
+    border: 1px solid #333;
+    padding: 25px 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.match-box-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.match-box-value {
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.match-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.match-progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 3px;
+}
+
+.analysis-section {
+    margin-bottom: 35px;
+}
+
+    .analysis-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .analysis-section h3 {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #888;
+        text-transform: uppercase;
+        margin: 0 c 15px 0;
+    }
+
+.skills-list-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag-item {
+    background: #f1f1f1;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.analysis-text-block {
+    background: #f9f9f9;
+    border-left: 3px solid #151515;
+    padding: 18px 20px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+}
+
+    .analysis-text-block.highlight {
+        background: #f4f4f4;
+        border-left-color: #555;
+    }
+
+@media (max-width: 900px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+    }
+}

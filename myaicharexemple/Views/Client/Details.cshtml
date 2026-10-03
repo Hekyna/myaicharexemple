@@ -1,0 +1,153 @@
+﻿@{
+    ViewData["Title"] = "Вакансія";
+
+    string vacancyText = ViewBag.VacancyText;
+    string vacancyKey = ViewBag.VacancyKey;
+
+    var vacancyName =
+        System.IO.Path.GetFileNameWithoutExtension(vacancyKey);
+}
+
+<div class="details-page">
+
+    <div class="details-top">
+
+        <a asp-controller="Client"
+           asp-action="Index"
+           class="back-link">
+            ← До вакансій
+        </a>
+
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="message success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="message error">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="details-layout">
+
+        <div class="vacancy-details">
+
+            <div class="details-label">
+                HR SYSTEM
+            </div>
+
+            <h1>
+                @vacancyName
+            </h1>
+
+            <div class="vacancy-status">
+                Відкрита вакансія
+            </div>
+
+            <div class="details-divider"></div>
+
+            <div class="details-content">
+                @vacancyText
+            </div>
+
+        </div>
+
+        <div class="resume-card">
+
+            <div class="resume-label">
+                ВІДГУКНУТИСЯ
+            </div>
+
+            <h2>
+                Залишити резюме
+            </h2>
+
+            <p>
+                Заповніть дані та завантажте своє резюме.
+            </p>
+
+            <form asp-controller="Client"
+                  asp-action="Apply"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                @Html.AntiForgeryToken()
+
+                <input type="hidden"
+                       name="vacancyKey"
+                       value="@vacancyKey" />
+
+                <div class="form-group">
+
+                    <label>
+                        Ім'я
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           placeholder="Ваше ім'я"
+                           required />
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input type="email"
+                           name="email"
+                           placeholder="example@email.com"
+                           required />
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Телефон
+                    </label>
+
+                    <input type="tel"
+                           name="phone"
+                           placeholder="+380..."
+                           required />
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Резюме
+                    </label>
+
+                    <input type="file"
+                           name="resume"
+                           accept=".pdf,.txt,application/pdf,text/plain"
+                           required />
+
+                    <small class="file-hint">
+                        PDF або TXT
+                    </small>
+
+                </div>
+
+                <button type="submit"
+                        class="apply-button">
+                    Відправити резюме
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

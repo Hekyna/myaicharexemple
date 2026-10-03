@@ -1,0 +1,489 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+    height: 64px;
+    background: #151515;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar a {
+    color: #ddd;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+    .navbar a:hover {
+        color: white;
+    }
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-name {
+    font-size: 13px;
+    color: #ccc;
+}
+
+
+/* =========================
+   MAIN PAGE
+   ========================= */
+
+.page {
+    width: 900px;
+    max-width: calc(100% - 40px);
+    margin: 45px auto 80px auto;
+}
+
+
+/* =========================
+   TOP
+   ========================= */
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.small-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.top h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    color: #181818;
+}
+
+.top p {
+    margin: 8px 0 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.back-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+    .back-link:hover {
+        color: #000;
+    }
+
+
+/* =========================
+   PAPER
+   ========================= */
+
+.paper {
+    background: white;
+    width: 100%;
+    min-height: 850px;
+    padding: 55px 65px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
+}
+
+
+/* =========================
+   VACANCY TEXT
+   ========================= */
+
+.paper-text {
+    display: block;
+    width: 100%;
+    height: 650px;
+    min-height: 650px;
+    resize: none;
+    overflow-y: auto;
+    border: none;
+    outline: none;
+    background: transparent;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #222;
+}
+
+    .paper-text::placeholder {
+        color: #aaa;
+    }
+
+    .paper-text:focus {
+        outline: none;
+    }
+
+
+/* =========================
+   REQUIREMENTS FILE
+   ========================= */
+
+.requirements {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+.requirements-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.requirements input[type="file"] {
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+}
+
+
+/* =========================
+   PAPER FOOTER
+   ========================= */
+
+.paper-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+    .paper-footer span {
+        font-size: 12px;
+        color: #999;
+    }
+
+
+    /* =========================
+   BUTTON
+   ========================= */
+
+    .paper-footer button {
+        border: none;
+        background: #151515;
+        color: white;
+        padding: 12px 22px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+        .paper-footer button:hover {
+            background: #333;
+        }
+
+        .paper-footer button:active {
+            transform: translateY(1px);
+        }
+
+
+/* =========================
+   INPUTS
+   ========================= */
+
+input,
+textarea,
+button {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+
+.paper-text::-webkit-scrollbar {
+    width: 7px;
+}
+
+.paper-text::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.paper-text::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+    .paper-text::-webkit-scrollbar-thumb:hover {
+        background: #aaa;
+    }
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 950px) {
+
+    .page {
+        width: auto;
+        max-width: calc(100% - 30px);
+        margin-top: 30px;
+    }
+
+    .paper {
+        padding: 40px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+        .navbar a {
+            margin-left: 12px;
+        }
+
+    .profile {
+        display: none;
+    }
+
+    .page {
+        max-width: calc(100% - 20px);
+        margin-top: 20px;
+    }
+
+    .top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+        .top h1 {
+            font-size: 26px;
+        }
+
+    .paper {
+        padding: 30px 25px;
+        min-height: 700px;
+    }
+
+    .paper-text {
+        height: 500px;
+        min-height: 500px;
+        font-size: 15px;
+    }
+
+    .paper-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+        .paper-footer button {
+            width: 100%;
+        }
+}
+/* =========================
+   GEMINI ANALYSIS PAGE DESIGN
+========================= */
+
+.analysis-container {
+    width: 1100px;
+    max-width: calc(100% - 40px);
+    margin: 40px auto 80px auto;
+}
+
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 30px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.analysis-sidebar {
+    background: #151515;
+    color: white;
+    padding: 35px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+.analysis-main-content {
+    background: #ffffff;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.ai-badge-top {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.analysis-sidebar h2 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.analysis-sidebar .birth-date {
+    color: #a0a0a0;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.match-box {
+    background: #222222;
+    border: 1px solid #333333;
+    padding: 25px 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.match-box-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.match-box-value {
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.match-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #333333;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.match-progress-fill {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 3px;
+}
+
+.analysis-section {
+    margin-bottom: 30px;
+}
+
+    .analysis-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .analysis-section h3 {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #888;
+        text-transform: uppercase;
+        margin: 0 0 12px 0;
+    }
+
+.skills-list-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag-item {
+    background: #f1f1f1;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.analysis-text-block {
+    background: #f9f9f9;
+    border-left: 3px solid #151515;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+    border-radius: 0 4px 4px 0;
+}
+
+    .analysis-text-block.highlight {
+        background: #f4f4f4;
+        border-left-color: #555;
+    }
+
+.details-divider {
+    height: 1px;
+    background: #eee;
+    margin: 25px 0;
+}
+
+@media (max-width: 900px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+    }
+}
