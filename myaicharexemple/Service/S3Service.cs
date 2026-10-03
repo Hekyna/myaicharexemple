@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using System.Text;
 using System.Text.Json;
 using MyHRExample.Models;
-using Google.GenAI;
 
 namespace MyHRExample.Services
 {
@@ -163,66 +162,95 @@ namespace MyHRExample.Services
 
             await _s3.PutObjectAsync(metadataRequest);
 
-            // ЗАПУСК АНАЛИЗА GEMINI (gemini-3.5-flash) И СОХРАНЕНИЕ В S3
-            await AnalyzeAndSaveGeminiResultAsync(resume, vacancyKey, id);
+            await AnalyzeAndSaveGeminiResultAsync(resume, candidateName, vacancyKey, id, key);
 
             return key;
         }
 
-        private async Task AnalyzeAndSaveGeminiResultAsync(IFormFile resume, string vacancyKey, string candidateId)
+        private static readonly JsonSerializerOptions AnalysisJsonOptions = new()
         {
+            PropertyNameCaseInsensitive = true,
+            WriteIndented = true,
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
+
+        private readonly GeminiClient _gemini = new(
+            Environment.GetEnvironmentVariable("") ?? "",
+            Environment.GetEnvironmentVariable("gemini-3.5-flash") ?? "gemini-flash-latest,gemini-3.6-flash,gemini-3.5-flash,gemini-3.5-flash-lite");
+
+        private async Task AnalyzeAndSaveGeminiResultAsync(
+            IFormFile resume,
+            string candidateName,
+            string vacancyKey,
+            string candidateId,
+            string resumeKey)
+        {
+            var analysis = new AnalysisViewModel
+            {
+                ResumeKey = resumeKey,
+                CandidateName = candidateName,
+                AnalyzedAt = DateTime.UtcNow
+            };
+
             try
             {
-                // Читаем текст вакансии из S3
-                string vacancyText = await GetVacancyText(vacancyKey);
+                var vacancyText = await GetVacancyText(vacancyKey);
 
-                // Читаем текст резюме из потока загруженного файла
-                string resumeText = string.Empty;
-                using (var reader = new StreamReader(resume.OpenReadStream()))
-                {
-                    resumeText = await reader.ReadToEndAsync();
-                }
+                using var memory = new MemoryStream();
+                await resume.CopyToAsync(memory);
 
-                // Инициализируем клиент Gemini
-                var client = new Client(null, null, "");
+                var mimeType = Path.GetExtension(resume.FileName).ToLowerInvariant() == ".pdf"
+                    ? "application/pdf"
+                    : "text/plain";
 
-                // Отправляем запрос модели с использованием версии 3.5-flash
-                var response = await client.Models.GenerateContentAsync(
-                    model: "gemini-3.5-flash",
-                    contents: $"Ви — досвідчений HR-спеціаліст. Проаналізуй кандидата з резюме під вимоги з вакансії та поверни результат СУВОРО у форматі JSON (без додаткового тексту і без markdown-розмітки, просто чистий JSON), який відповідає таким полям класу GeResponse:\n" +
-                              $"CandidateName, CandidateSurname, CandidateBirthDate, Skills (масив рядків), CandidateMatchPercentage (число), CandidateExperience, CandidateDescription.\n\n" +
-                              $"Вакансія:\n{vacancyText}\n\nРезюме:\n{resumeText}"
-                );
+                var answer = await _gemini.AnalyzeAsync(memory.ToArray(), mimeType, BuildPrompt(vacancyText));
+                var result = JsonSerializer.Deserialize<AnalysisViewModel>(answer, AnalysisJsonOptions) ?? new AnalysisViewModel();
 
-                string rawText = response.Candidates[0].Content.Parts[0].Text.Trim();
-
-                // Очистка от markdown-оберток ```json если они присутствуют в ответе
-                if (rawText.StartsWith("```"))
-                {
-                    int firstNewline = rawText.IndexOf('\n');
-                    int lastBackticks = rawText.LastIndexOf("```");
-                    if (firstNewline != -1 && lastBackticks != -1 && lastBackticks > firstNewline)
-                    {
-                        rawText = rawText.Substring(firstNewline + 1, lastBackticks - firstNewline - 1).Trim();
-                    }
-                }
-
-                // Сохранение готового JSON-результата анализа в S3 бакет в папку analysis/
-                using var analysisStream = new MemoryStream(Encoding.UTF8.GetBytes(rawText));
-                var analysisRequest = new PutObjectRequest
-                {
-                    BucketName = _bucketName,
-                    Key = $"analysis/{candidateId}.json",
-                    InputStream = analysisStream,
-                    ContentType = "application/json"
-                };
-
-                await _s3.PutObjectAsync(analysisRequest);
+                analysis.Skills = result.Skills ?? new();
+                analysis.ConfirmedRequirements = result.ConfirmedRequirements ?? new();
+                analysis.MissingRequirements = result.MissingRequirements ?? new();
+                analysis.Summary = result.Summary;
+                analysis.MatchPercent = result.MatchPercent;
+                analysis.Status = "Completed";
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Помилка аналізу Gemini: {ex.Message}");
+                Console.WriteLine(ex);
+                analysis.Status = "Failed";
+                analysis.Error = ex.Message;
             }
+
+            try
+            {
+                await _s3.PutObjectAsync(new PutObjectRequest
+                {
+                    BucketName = _bucketName,
+                    Key = $"analysis/{candidateId}.json",
+                    ContentBody = JsonSerializer.Serialize(analysis, AnalysisJsonOptions),
+                    ContentType = "application/json"
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Не вдалося зберегти аналіз: {ex.Message}");
+            }
+        }
+
+        private static string BuildPrompt(string vacancyText)
+        {
+            return
+                "Ти HR-асистент. Проаналізуй резюме кандидата у доданому файлі і порівняй його з вакансією.\n\n" +
+                "Вакансія та вимоги:\n" + vacancyText + "\n\n" +
+                "Поверни лише JSON такого вигляду:\n" +
+                "{\n" +
+                "  \"skills\": [\"навички, знайдені в резюме\"],\n" +
+                "  \"confirmedRequirements\": [\"вимоги вакансії, які підтверджені резюме\"],\n" +
+                "  \"missingRequirements\": [\"вимоги вакансії, для яких у резюме не знайдено інформації\"],\n" +
+                "  \"summary\": \"короткий висновок про кандидата, 2-3 речення українською\",\n" +
+                "  \"matchPercent\": 0\n" +
+                "}\n" +
+                "matchPercent — ціле число від 0 до 100, наскільки кандидат відповідає вимогам. " +
+                "Не вигадуй інформацію, якої немає в резюме.";
         }
 
         public async Task<AnalysisViewModel> GetAnalysisResultAsync(string candidateId)

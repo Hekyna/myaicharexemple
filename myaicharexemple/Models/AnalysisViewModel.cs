@@ -2,12 +2,15 @@
 {
     public class AnalysisViewModel
     {
-        public string CandidateName { get; set; }
-        public string CandidateSurname { get; set; }
-        public string CandidateBirthDate { get; set; }
-        public List<string> Skills { get; set; }
-        public double CandidateMatchPercentage { get; set; }
-        public string CandidateExperience { get; set; }
-        public string CandidateDescription { get; set; }
+        public string ResumeKey { get; set; } = "";
+        public string CandidateName { get; set; } = "";
+        public string Status { get; set; } = "";
+        public List<string> Skills { get; set; } = new();
+        public List<string> ConfirmedRequirements { get; set; } = new();
+        public List<string> MissingRequirements { get; set; } = new();
+        public string Summary { get; set; } = "";
+        public int MatchPercent { get; set; }
+        public DateTime AnalyzedAt { get; set; }
+        public string? Error { get; set; }
     }
 }

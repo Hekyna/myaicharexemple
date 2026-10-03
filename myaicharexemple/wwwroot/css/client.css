@@ -6,11 +6,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-/* =========================
-   CLIENT PAGE
-========================= */
-
 .client-page {
     width: 1100px;
     max-width: calc(100% - 40px);
@@ -54,11 +49,6 @@
     .client-back:hover {
         color: #000;
     }
-
-
-/* =========================
-   VACANCY TABLE
-========================= */
 
 .vacancy-table {
     background: white;
@@ -149,11 +139,6 @@
         background: #333;
     }
 
-
-/* =========================
-   EMPTY VACANCIES
-========================= */
-
 .empty-vacancies {
     text-align: center;
     padding: 70px 20px;
@@ -174,11 +159,6 @@
     color: #999;
     font-size: 14px;
 }
-
-
-/* =========================
-   DETAILS PAGE
-========================= */
 
 .details-page {
     width: 1100px;
@@ -206,11 +186,6 @@
     gap: 30px;
     align-items: start;
 }
-
-
-/* =========================
-   VACANCY DETAILS
-========================= */
 
 .vacancy-details {
     background: white;
@@ -255,11 +230,6 @@
     color: #333;
 }
 
-
-/* =========================
-   RESUME CARD
-========================= */
-
 .resume-card {
     background: #151515;
     color: white;
@@ -286,11 +256,6 @@
     line-height: 1.6;
     margin: 12px 0 25px;
 }
-
-
-/* =========================
-   FORM
-========================= */
 
 .form-group {
     margin-bottom: 18px;
@@ -331,11 +296,6 @@
     font-size: 11px;
 }
 
-
-/* =========================
-   APPLY BUTTON
-========================= */
-
 .apply-button {
     width: 100%;
     border: none;
@@ -353,11 +313,6 @@
         background: #ddd;
     }
 
-
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 850px) {
 
     .details-layout {
@@ -372,7 +327,6 @@
         padding: 30px;
     }
 }
-
 
 @media (max-width: 750px) {
 
@@ -405,6 +359,7 @@
         box-sizing: border-box;
     }
 }
+
 .resume-row {
     grid-template-columns: 2fr 1.2fr 1.2fr 220px;
 }
@@ -461,9 +416,6 @@
         flex-wrap: wrap;
     }
 }
-/* =========================
-   GEMINI ANALYSIS PAGE
-========================= */
 
 .analysis-container {
     width: 1100px;
@@ -567,7 +519,7 @@
         letter-spacing: 1px;
         color: #888;
         text-transform: uppercase;
-        margin: 0 c 15px 0;
+        margin: 0 0 15px 0;
     }
 
 .skills-list-flex {
@@ -598,6 +550,41 @@
     .analysis-text-block.highlight {
         background: #f4f4f4;
         border-left-color: #555;
+    }
+
+.check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .check-list li {
+        position: relative;
+        padding: 8px 0 8px 28px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+    .check-list.confirmed li::before {
+        content: "✓";
+        color: #2f855a;
+    }
+
+    .check-list.missing li::before {
+        content: "✕";
+        color: #c53030;
     }
 
 @media (max-width: 900px) {

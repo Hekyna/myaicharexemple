@@ -12,32 +12,39 @@
         </a>
     </div>
 
-    @if (Model != null)
+    @if (Model != null && Model.Status == "Completed")
     {
         <div class="analysis-layout">
 
-            <!-- Ліва колонка (Сайдбар) -->
             <div class="analysis-sidebar">
                 <div class="ai-badge-top">Gemini AI Insights</div>
-                <h2>@Model.CandidateName @Model.CandidateSurname</h2>
-                <div class="birth-date">Дата народження: @Model.CandidateBirthDate</div>
+                <h2>@Model.CandidateName</h2>
+                <div class="birth-date">Проаналізовано: @Model.AnalyzedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
 
                 <div class="match-box">
                     <div class="match-box-label">Відповідність вакансії</div>
-                    <div class="match-box-value">@Model.CandidateMatchPercentage%</div>
+                    <div class="match-box-value">@Model.MatchPercent%</div>
                     <div class="match-progress-bar">
-                        <div class="match-progress-fill" style="width: @Model.CandidateMatchPercentage%;"></div>
+                        <div class="match-progress-fill" style="width: @(Model.MatchPercent)%;"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Права колонка (Контент) -->
             <div class="analysis-main-content">
 
                 <div class="analysis-section">
-                    <h3>Ключові навички</h3>
+                    <h3>AI summary</h3>
+                    <div class="analysis-text-block highlight">
+                        @Model.Summary
+                    </div>
+                </div>
+
+                <div class="details-divider"></div>
+
+                <div class="analysis-section">
+                    <h3>Знайдені навички</h3>
                     <div class="skills-list-flex">
-                        @if (Model.Skills != null && Model.Skills.Count > 0)
+                        @if (Model.Skills.Count > 0)
                         {
                             foreach (var skill in Model.Skills)
                             {
@@ -54,23 +61,49 @@
                 <div class="details-divider"></div>
 
                 <div class="analysis-section">
-                    <h3>Досвід роботи</h3>
-                    <div class="analysis-text-block">
-                        @Model.CandidateExperience
-                    </div>
+                    <h3>Підтверджені вимоги вакансії</h3>
+                    @if (Model.ConfirmedRequirements.Count > 0)
+                    {
+                        <ul class="check-list confirmed">
+                            @foreach (var item in Model.ConfirmedRequirements)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span style="color: #999; font-size: 14px;">Немає</span>
+                    }
                 </div>
 
                 <div class="details-divider"></div>
 
                 <div class="analysis-section">
-                    <h3>Висновок HR-спеціаліста</h3>
-                    <div class="analysis-text-block highlight">
-                        @Model.CandidateDescription
-                    </div>
+                    <h3>Вимоги, для яких інформації не знайдено</h3>
+                    @if (Model.MissingRequirements.Count > 0)
+                    {
+                        <ul class="check-list missing">
+                            @foreach (var item in Model.MissingRequirements)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span style="color: #999; font-size: 14px;">Немає</span>
+                    }
                 </div>
 
             </div>
 
+        </div>
+    }
+    else if (Model != null)
+    {
+        <div class="message error">
+            Помилка аналізу: @Model.Error
         </div>
     }
     else
